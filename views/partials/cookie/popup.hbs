@@ -1,4 +1,4 @@
-{{!-- ID à injecter Pop-Up --}}
+{{!-- ID à injecter Pop-Up
 <div id="{{ idAllCookie }}"></div>
 
 {{!-- Oups --}}
@@ -9,7 +9,7 @@
     Et suppression après un delai
     Pop-Up
 --}}
-{{#if idAllCookie }}
+{{!-- {{#if idAllCookie }}
 <script>
   setTimeout(() => { // J'attend 1.5s pour faire apparaitre ma div
     $('#{{ idAllCookie }}').ready(() => {
@@ -25,4 +25,4 @@
     })
   }, 1500)
 </script>
-{{/if}}
+{{/if}} --}} --}}

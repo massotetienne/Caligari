@@ -98,18 +98,22 @@
                     <span class="honey" aria-hidden="false">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Your E-mail" aria-label="Recipient's username"
-                        aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn bg-gold" type="button" id="button-addon2">Envoyer</button>
+            
+                <div class="modal-body">
+                    <form action="/lostpassword" method="POST">
+                    <div class="input-group mb-3">
+                        <input type="text" name="email" class="form-control" placeholder="Your E-mail"
+                            aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn bg-gold" type="submit" id="button-addon2">Envoyer</button>
+                        </div>
                     </div>
+                    </form>
+                    <div class="modal-footer bg-gold"></div>
+
+
                 </div>
-                <div class="modal-footer bg-gold"></div>
-
-
-            </div>
+            </form>
         </div>
     </div>
 </div>

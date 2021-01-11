@@ -3,7 +3,7 @@
     import layout main.hbs
     :banner
 --}}
-<div>
+{{!-- <div>
   {{!-- Si il ya le cookie --}}
   {{#if CPtiGato }}
   {{!-- Sinon si il n'y a pas le cookie --}}
@@ -14,40 +14,40 @@
       <p>Vous devez accepter le cookie PtiGato pour pouvoir naviguer sur le site</p>
     </div>
   </div>
-  {{/if}}
+  {{/if}} 
   {{!-- 
     1) Clear Tout les Cookie
 --}}
-  <a href="/clearCookie">
+  {{!-- <a href="/clearCookie">
     <button>Supprimer tous les cookies</button>
-  </a>
+  </a> --}}
 
-  {{!-- 
-    2) New Cookie
---}}
+  
+    {{!-- 2) New Cookie --}}
+
   {{!-- <a href="/newCookie">
     <button>New Cookie</button>
   </a> --}}
 
-  {{!-- 
-    3) New ptiGato
---}}
+  
+    {{!-- 3) New ptiGato --}}
+
   {{!-- <a href="/newPtiGato">
     <button>New ptiGato</button>
   </a> --}}
 
 
-  {{!-- 
+{{!--   
     Kill cookie:
       - Cookie
-      - ptiGAto
---}}
-  {{!-- <form action="/cookie" method="post">
+      - ptiGAto --}}
+{{!-- 
+  <form action="/cookie" method="post">
     <button type='submit' name='clearCookie' value="killCookie">Clear Cookie</button>
     <button type='submit' name='clearPtiGato' value="killPtiGato">Clear ptiGato</button>
   </form> --}}
   © 2020 CaligariTatoo, Inc.
-</div>
+{{!-- </div>
 {{!-- 
     Appelle des json (render)
  --}}
@@ -56,4 +56,4 @@
 {{!-- Si il y a le cookie "cookie" controller home --}}
 {{#if cook }}
 <h4>cook: {{ cook.path }}</h4>
-{{/if}}
+{{/if}} 

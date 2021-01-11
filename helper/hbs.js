@@ -1,7 +1,13 @@
 module.exports = {
 
     stripTags: function (input) {
-        return input.replace(/<(?:.|\n)*?>/gm, '');
+        temp=input
+        tempEmpty=""
+        if (temp===undefined){
+            return tempEmpty
+        }else{
+            return temp.replace(/<(?:.|\n)*?>/gm, '');
+        } 
     },
     limit: function (arr, limit) {
         if (!Array.isArray(arr)) {
@@ -10,7 +16,14 @@ module.exports = {
         return arr.slice(0, limit);
     },   
     last: function (value, n) {
-        return value.slice(-Math.abs(n))
+        temp=value
+        tempEmpty=""
+        if (temp===undefined){
+            return tempEmpty
+        }else{
+            return temp.slice(-Math.abs(n))
+        }
+        
     }, 
     limitChar: function (text, nb) {
         str = text

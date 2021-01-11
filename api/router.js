@@ -133,7 +133,7 @@ router.route('/message/get')
 router.route('/nodemailerTest')
     .post(nodemailerController.test)
 
-// email de verification
+// // email de verification
 // router.route('/verification')
 //     .post(nodemailerController.sendVerif)
 
@@ -176,18 +176,16 @@ router.route('/newPtiGato')
     
 // =====================================================
 
-// ========== test mdp reset ===========
+// Mot de passe oublier
+router.route('/lostpassword')
+    .post(nodemailerController.lostPassword)
 
-// const userCtrl = require ('./controllers/userCtrl');
-//   const  Resetpassword = require ('./controllers/Resetpassword');
-
-
-// router.route('/forgotpasswordResponse')  
-// .post(userCtrl.forgotpasswordResponse) 
-
-// router.route('/reset/:token')  
-// .get(Resetpassword.resetpasswordResponse)
-
+// Page de mot de passe oublier
+router.route('/lostpassword/:id')
+    .get(nodemailerController.editPassword)
+//  Mot de passe oublier
+    router.route('/editPassword/:id')
+        .post(UserLogin.editPasswordPost)
 // =====================================================
 // Home
 

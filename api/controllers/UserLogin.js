@@ -41,18 +41,36 @@ module.exports = {
                             
                         })
                     }
-
-
                 })
-
-
             }
-         
-
         })
+    },    
+     // Créer un nouveau mot de passe pour l'user
+    editPasswordPost: async (req, res) => {
+       const user = await User.find({
+           // Retrouver un user par son email
+           email: req.body.email
+       })
 
+       if (!user) {
+           console.log("L'utilisateur n'exite pas")
+           res.redirect('/')
+       } else {
+           // Mettre controller pour éditer l'utilisateur
+           bcrypt.hash(req.body.password, 10, (error, encrypted) => {
+               User.findOneAndUpdate({
+                   email: req.body.email
+               }, {
+                   password: encrypted
+               }, (err) => {
+                   if (err) console.log(err)
 
-    },
+                   console.log(req.body)
+                   res.redirect('/')
+               })
+           })
+       }
+   }, 
     logout: (req, res) => {
 
         req.session.destroy(() => {

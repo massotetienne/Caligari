@@ -1,8 +1,8 @@
-<div class="container-cookie">
+{{!-- <div class="container-cookie">
   <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#cookieModal">
     See Cookies
   </button>
-</div>
+</div> --}}
 
 <div class="modal fade bg_black" id="cookieModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -17,7 +17,7 @@
               <a href="" class="btn bg-gold honey mr-1 btn-sm" style="height: 35px;" data-dismiss="modal">I accept</a>
               <a href="" class="btn bg-black honey btn-sm" style="height: 35px;" data-dismiss="modal">refuser</a>
             </div>
-            {{> cookie/banner }}
+             {{> cookie/banner }}
           </div>
         </div>
       </div>
@@ -38,4 +38,4 @@
   $(document).ready(function () {
     $('#cookieModal').modal('show');
   });
-</script>
+</script> 
