@@ -73,6 +73,10 @@ a {
 .bg-gold {
   background-color: #caab74
 }
+.bg-tran {
+  background-color: transparent;
+  border: none;
+}
 .red{
   color: red;
 }

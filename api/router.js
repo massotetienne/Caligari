@@ -186,6 +186,13 @@ router.route('/lostpassword/:id')
 //  Mot de passe oublier
     router.route('/editPassword/:id')
         .post(UserLogin.editPasswordPost)
+// email de verification
+router.route('/verification')
+    .post(nodemailerController.sendVerif)
+// Page de vérification
+router.route('/verify/:id')
+    .get(nodemailerController.verifMail)
+    .post(UserLogin.verifMailPost)
 // =====================================================
 // Home
 

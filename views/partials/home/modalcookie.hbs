@@ -12,12 +12,8 @@
         <div class="notice d-flex justify-content-between align-items-center">
           <div class="buttons d-flex flex-column p-2 flex-lg-row close">
             <div>
-              <p class="ft-10 honey text-center">This website uses cookies to personalize content and analyse traffic in
-                order to offer you a better experience.</p>
-              <a href="" class="btn bg-gold honey mr-1 btn-sm" style="height: 35px;" data-dismiss="modal">I accept</a>
-              <a href="" class="btn bg-black honey btn-sm" style="height: 35px;" data-dismiss="modal">refuser</a>
+            {{> cookie/banner }} 
             </div>
-             {{> cookie/banner }}
           </div>
         </div>
       </div>
@@ -34,8 +30,11 @@
 {{!-- le script piur activer desactiver les cookie --}}
 
 
-<script>
-  $(document).ready(function () {
-    $('#cookieModal').modal('show');
-  });
-</script> 
+{{#unless cookie }}
+<script type="text/javascript">
+  $(
+    document).ready(function () {
+      $('#cookieModal').modal('show');
+    });
+</script>
+{{/unless }}

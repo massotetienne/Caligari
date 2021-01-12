@@ -9,8 +9,6 @@
 <div class="container ">
     <section id="content" class="page-content card card-block container mb-3 bg-black ">
 
-
-
         <section class="login-form">
             <div>
                 <p class="text-center ft-20">Hey , bienvenue ! </p>
@@ -56,11 +54,24 @@
                     </button>
                 </footer>
             </form>
+            {{#if sess }}
             <form action="/user/Logout" method="get">
                 <button class="btn bg-gold black mb-3 p-2 pl-5 pr-5 " type="submit">
                     Deconnextion
                 </button>
             </form>
+            
+            {{!-- mail de verif --}}
+            {{!-- =========================================== --}}
+            <form action="/verification" method="post">
+                <input type="hidden" name="email" value="{{ sess.email }}" />
+                <button class="btn bg-gold black mb-3 p-2 pl-5 pr-5 " type="submit">
+                    Verif E-mail
+                </button>
+            </form>
+            {{!-- =========================================== --}}
+            {{!-- mail de verif --}}
+            {{/if}}
         </section>
         <hr>
         <div class="no-account mb-3">
@@ -98,9 +109,9 @@
                     <span class="honey" aria-hidden="false">&times;</span>
                 </button>
             </div>
-            
-                <div class="modal-body">
-                    <form action="/lostpassword" method="POST">
+
+            <div class="modal-body">
+                <form action="/lostpassword" method="POST">
                     <div class="input-group mb-3">
                         <input type="text" name="email" class="form-control" placeholder="Your E-mail"
                             aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -108,12 +119,11 @@
                             <button class="btn bg-gold" type="submit" id="button-addon2">Envoyer</button>
                         </div>
                     </div>
-                    </form>
-                    <div class="modal-footer bg-gold"></div>
+                </form>
+                <div class="modal-footer bg-gold"></div>
 
 
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

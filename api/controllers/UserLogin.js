@@ -30,6 +30,12 @@ module.exports = {
                     } else {
 
                         req.session.userId = user._id
+                        req.session.sess = {
+                            name: user.name,
+                            email: user.email,
+                            status: user.status,
+                            isAdmin: user.isAdmin
+                        }
                         // res.redirect('/')
                         if (user.isAdmin === true) {
                             console.log("je suis admin");
@@ -70,7 +76,22 @@ module.exports = {
                })
            })
        }
-   }, 
+   },
+   verifMailPost: async (req, res) => {
+    const user = await User.findById(req.params.id)
+
+    console.log('Verified post controller');
+
+    if (user) {
+        User.findByIdAndUpdate(req.params.id, {
+            isVerified: true
+        }, (err, data) => {
+            if (err) console.log(err)
+            req.session.isVerified = true
+            res.redirect('/')
+        })
+    } else res.redirect('/')
+},
     logout: (req, res) => {
 
         req.session.destroy(() => {

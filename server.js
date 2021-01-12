@@ -107,8 +107,11 @@ app.use(express.static('public'));
 
 app.use('*', (req, res, next) => {
     res.locals.user = req.session.userId;
+    res.locals.sess = req.session.sess;
     res.locals.isAdmin = req.session.isAdmin;
+    console.log('Sess Locals: ', res.locals.sess)
     console.log("ID Session: " + res.locals.user);
+    res.locals.cookie = req.cookies.Cookie;
     next()
 })
 

@@ -31,7 +31,9 @@
                             class="pl-3 fas fa-map-marker-alt "></i></a>
                     <a class="dropdown-item gold" href="/tarif">Tarifs<i class="pl-3 fab fa-bitcoin"></i></a>
                     {{#if user}}
-                    <a class="dropdown-item gold" href="/log">Deconnection<i class="pl-3 fas fa-person-booth"></i></a>
+                    <form action="/user/Logout" method="get">
+                   <button class="bg-tran gold">Deconnection<i class="pl-3 fas fa-person-booth"></i></button>
+                    </form>
                     {{/if}}
                     {{#if isAdmin}}
                     <a class="dropdown-item gold" href="/admin">(Admin)<i class="pl-3 fas fa-person-booth"></i></a>
