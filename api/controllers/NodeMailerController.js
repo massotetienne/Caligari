@@ -3,7 +3,7 @@
  * ************************ */
 
 // import nodemailer 
-const User = require ('../../database/models/User')
+const User = require('../../database/models/User')
 const nodemailer = require('nodemailer'),
   // Déclaration ne notre transporter
   // C'est en quelque sorte notre connexion à notre boite mail
@@ -22,14 +22,14 @@ const nodemailer = require('nodemailer'),
 var rand, mailOptions, host, link;
 
 module.exports = {
-    get: async (req, res) => {
+  get: async (req, res) => {
     const mail = await Message.find({})
     // console.log(actus)
 
-    res.render("admin",{
-        mail
+    res.render("admin", {
+      mail
     })
-},
+  },
   // Action test boite mail > nodemailer
   test: (req, res) => {
     console.log(req.body)
@@ -51,13 +51,13 @@ module.exports = {
       else {
         console.log(info)
         res.redirect('/admin')
-          // success: "Un email à bien été envoyer à " + req.body.email
-    // )}
+        // success: "Un email à bien été envoyer à " + req.body.email
+        // )}
       }
     })
-  
 
-  },  // Envoie du message de vérification
+
+  }, // Envoie du message de vérification
   sendVerif: (req, res) => {
     // génération d'un chiffre random
     rand = Math.floor((Math.random() * 100) + 54)
@@ -78,13 +78,13 @@ module.exports = {
       `
     }
     console.log(mailOptions)
-    
+
     // Et envoi notre mail avec nos callback
     transporter.sendMail(mailOptions, (err, res, next) => {
 
       if (err) {
         console.log(err)
-        res.redirect ("/")
+        res.redirect("/")
 
       } else {
         console.log("Message Envoyer")
@@ -134,132 +134,77 @@ module.exports = {
   // Mot de passe oublié: Envoie du mail
   lostPassword: async (req, res) => {
     const user = await User.findOne({
-        email: req.body.email
+      email: req.body.email
     })
 
     console.log(req.body);
     //console.log('lostpassword');
     if (user) {
-        // génération d'un chiffre random
-        rand = Math.floor((Math.random() * 100) + 54)
-        // on definit notre host
-        host = req.get('host')
-        // on définit le lien
-        link = "http://" + req.get('host') + "/lostpassword/" + rand
-        // et enfin notre mail
-        mailOptions = {
-            from:'truc.test007@gmail.com',
-            to: req.body.email,
-            subject: "Création d'un nouveau mot de passe",
-            rand: rand,
-            html: `
+      // génération d'un chiffre random
+      rand = Math.floor((Math.random() * 100) + 54)
+      // on definit notre host
+      host = req.get('host')
+      // on définit le lien
+      link = "http://" + req.get('host') + "/lostpassword/" + rand
+      // et enfin notre mail
+      mailOptions = {
+        from: 'truc.test007@gmail.com',
+        to: req.body.email,
+        subject: "Création d'un nouveau mot de passe",
+        rand: rand,
+        html: `
     <h2>Tu y es presque</h2><br>
     <h5>Cliques sur le lien suivant afin de terminer la procédure de recréation du mot de passe.</h5><br>
     <a href=" ` + link + ` ">Cliques ici</a>
   `
+      }
+      console.log(mailOptions)
+      // Et envoi notre mail avec nos callback
+      transporter.sendMail(mailOptions, (err, res, next) => {
+        if (err) {
+          console.log(err)
+          res.send("error")
+        } else {
+          console.log("Message Envoyé")
+          next()
         }
-        console.log(mailOptions)
-        // Et envoi notre mail avec nos callback
-        transporter.sendMail(mailOptions, (err, res, next) => {
-            if (err) {
-                console.log(err)
-                res.end("error")
-            } else {
-                console.log("Message Envoyé")
-                next()
-            }
-        })
-        // Réponse
-        res.render('home', {
-            success: "Un email à bien été envoyer à " + req.body.email
-        })
+      })
+      // Réponse
+      res.render('home', {
+        success: "Un email à bien été envoyer à " + req.body.email
+      })
 
     } else res.redirect('/')
-},
- // Génération de la page ID (Unique)
- editPassword: (req, res) => {
-  console.log(req.protocol + "://" + req.get('host'))
-  console.log('Page lostpassword ID')
+  },
+  // Génération de la page ID (Unique)
+  editPassword: (req, res) => {
+    console.log(req.protocol + "://" + req.get('host'))
+    console.log('Page lostpassword ID')
 
-  // Ici on tcheck notre protocole hébergeur (nodejs localhost) et le liens générer dans le mail
-  if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
+    // Ici on tcheck notre protocole hébergeur (nodejs localhost) et le liens générer dans le mail
+    if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
       console.log("Le domaine correspond. Les informations proviennent d'un e-mail authentique")
 
       // Ici on tcheck notre id du mail avec la variable enregistrer en cache (rand)
       if (req.params.id == mailOptions.rand) {
-          console.log("l'email a été vérifié")
-          // res.end("<h1>Email " + mailOptions.to + " is been Successfully verified")
-          res.render('editPassword', {
-              mailOptions
-          })
+        console.log("l'email a été vérifié")
+        // res.end("<h1>Email " + mailOptions.to + " is been Successfully verified")
+        res.render('editPassword', {
+          mailOptions
+        })
 
       } else {
-          console.log("email non vérifié")
-          res.render('editPassword', {
-              message: "Bad Request !"
-          })
+        console.log("email non vérifié")
+        res.render('editPassword', {
+          message: "Bad Request !"
+        })
       }
 
-  } else {
+    } else {
       res.render('editPassword', {
-          message: "La demande provient d'une source inconnue !"
+        message: "La demande provient d'une source inconnue !"
       })
-  }
-},
+    }
+  },
 
-    // // Envoie du message de vérification
-  // sendVerif: (req, res) => {
-  //   // génération d'un chiffre random
-  //   rand = Math.floor((Math.random() * 100) + 54)
-  //   // on definit notre host
-  //   host = req.get('host')
-  //   // on définit le lien
-  //   link = "http://" + req.get('host') + "/verify/" + rand
-  //   // et enfin notre mail
-  //   mailOptions = {
-  //     from: 'truc.test007@gmail.com',
-  //     to: req.body.email,
-  //     subject: "Veuillez confirmez votre email svp.",
-  //     rand: rand,
-  //     html: `
-  //       <h2>Encore un effort</h2>,<br>
-  //       <h5>Cliquer sur le lien suivant afin de finir la procédure de validation de mail.</h5><br>
-  //       <a href=" ` + link + ` ">Click here to verify</a>
-  //     `
-  //   }
-  //   console.log(mailOptions)
-  //   // Et envoi notre mail avec nos callback
-  //   transporter.sendMail(mailOptions, (err, res, next) => {
-  //     if (err) {
-  //       console.log(err)
-  //       res.end("error")
-  //     } else {
-  //       console.log("Message Envoyer")
-  //       next()
-  //     }
-  //   })
-  //   // Response
-  //   res.render('home', {
-  //     success: "Un email de vérification à bien été envoyer à " + req.body.email
-  //   })
-  // },
-  // // Génération de la page ID (Unique)
-  // verifMail: (req, res) => {
-  //   console.log(req.protocol + "://" + req.get('host'))
-  //   console.log('Page verify: ')
-  //   // Ici on tcheck notre protocole hébergeur (nodejs localhost) et le liens générer dans le mail
-  //   if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
-  //     console.log("Domain is matched. Information is from Authentic email")
-  //     // Ici on tcheck notre id du mail avec la variable enregistrer en cache (rand)
-  //     if (req.params.id == mailOptions.rand) {
-  //       console.log("email is verified")
-  //       res.end("<h1>Email " + mailOptions.to + " is been Successfully verified")
-  //     } else {
-  //       console.log("email is not verified")
-  //       res.end("<h1>Bad Request</h1>")
-  //     }
-  //   } else {
-  //     res.end("<h1>Request is from unknown source")
-  //   }
-  // }
 }
