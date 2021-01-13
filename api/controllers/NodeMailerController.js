@@ -148,7 +148,7 @@ module.exports = {
         link = "http://" + req.get('host') + "/lostpassword/" + rand
         // et enfin notre mail
         mailOptions = {
-            from: process.env.EMAIL,
+            from:'truc.test007@gmail.com',
             to: req.body.email,
             subject: "Création d'un nouveau mot de passe",
             rand: rand,
